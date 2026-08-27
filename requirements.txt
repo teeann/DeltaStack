@@ -1,0 +1,9 @@
+torch==2.9.0
+triton==3.5.0
+transformers==5.16.1
+einops==0.8.1
+numpy==2.3.5
+pandas==2.3.3
+wandb==0.24.0
+pytest==9.0.2
+

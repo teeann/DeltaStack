@@ -22,3 +22,34 @@ Linear attention architectures based on the Delta rule, such as DeltaNet and RWK
 ## Updates
 
 - **2026-04-30**: Paper accepted to ICML 2026!
+
+## Installation
+
+Requires a CUDA GPU -- the interleave kernels are written in Triton. Reference
+environment: Python 3.12, PyTorch 2.9, CUDA 12.6.
+
+```bash
+pip install -r requirements.txt
+```
+
+## Running experiments
+
+Experiments are JSON configs in `experiment_configs/`, passed by name:
+
+```bash
+python run_experiment.py -c lab           # single GPU (`just lab`)
+python run_experiment.py -c lab --multi   # 4 seeds across 4 GPUs
+```
+
+Metrics print to stdout; results and checkpoints are written to `results/` and
+`checkpoints/`. Key config fields:
+
+| Key | Meaning |
+| --- | --- |
+| `task` | Formal-language task (see `data_dir/`) |
+| `model_name` | `deltastack`, `deltanet`, `gateddeltanet`, `deltaproduct`, `rwkv6`, `transformer_causal`, `stack_rnn`, `lstm`, ... |
+| `stack_size` | Stack depth. **Must be a power of 2** -- the fused Triton kernel indexes it with `tl.arange` |
+| `val_stack_size` | Eval-time stack depth (default 256), for length generalization beyond the trained depth |
+
+Logging to [Weights & Biases](https://wandb.ai) is optional: set `WANDB_API_KEY`
+in a `.env` file at the repository root.

@@ -1,0 +1,18 @@
+{
+    "task": "reverse_string",
+    "model_name": "deltastack",
+    "num_blocks": 2,
+    "num_heads": 4,
+    "model_dim": 128,
+    "batch_size": 256,
+    "num_steps": 6000,
+    "print_steps": 200,
+    "learning_rate": 0.002,
+    "early_stop_threshold": 0.9,
+    "init_std": 0.5,
+    "use_glu": true,
+    "seed": 6,
+    "stack_size": 64,
+    "dropout_rate": 0.0,
+    "wd": 0.01
+}
